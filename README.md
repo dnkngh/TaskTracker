@@ -2,14 +2,8 @@
 ### 0. Установка и запуск
 
 Клонирование репозитория:
-
 ```
 git clone https://github.com/dnkngh/TaskTracker.git
-```
-
-Установка зависимостей:
-```
-pip install -r requirements.txt
 ```
 Установка виртуального окружения:
 ```
@@ -18,6 +12,10 @@ python -m venv venv
 Запуск виртуального окружения:
 ```
 source venv/scripts/activate
+```
+Установка зависимостей:
+```
+pip install -r requirements.txt
 ```
 Запуск проекта в dev-режиме (из папки tasktracker/tasktracker/):
 ```
