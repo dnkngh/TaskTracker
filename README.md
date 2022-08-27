@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ```
 python manage.py runserver
 ```
-
+111
 ### 1. Цель проекта 
 <hr>
 Цель проекта - разработать систему отслеживания задач (далее Система).
