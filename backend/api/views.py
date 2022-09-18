@@ -1,8 +1,13 @@
 from rest_framework import viewsets
 
-from tasks.models import Task
+from tasks.models import Project, Task
 from users.models import User
-from .serializers import TaskSerializer, UserSerializer
+from .serializers import ProjectSerializer, TaskSerializer, UserSerializer
+
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
 
 
 class TaskViewSet(viewsets.ModelViewSet):
