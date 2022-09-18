@@ -114,7 +114,7 @@ class Task(models.Model):
         return self.name
 
 
-class TaskLoggedTime(models.Model):
+class TaskLogTime(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -150,5 +150,5 @@ class TaskLoggedTime(models.Model):
 
     class Meta:
         ordering = ('id',)
-        verbose_name = 'TaskLoggedTime'
-        verbose_name_plural = 'TaskLoggedTime'
+        verbose_name = 'TaskLogTime'
+        verbose_name_plural = 'TaskLogTimes'

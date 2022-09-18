@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tasks.models import Project, Task, TaskLoggedTime
+from tasks.models import Project, Task, TaskLogTime
 
 
 @admin.register(Project)
@@ -28,8 +28,8 @@ class TaskAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(TaskLoggedTime)
-class TaskLoggedTimeAdmin(admin.ModelAdmin):
+@admin.register(TaskLogTime)
+class TaskLogTimeAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'user',

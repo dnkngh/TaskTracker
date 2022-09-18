@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from tasks.models import Project, Task
-from users.models import User
+from tasks.models import Project, Task, TaskLogTime
+
+User = get_user_model()
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -13,6 +15,12 @@ class ProjectSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
+        fields = '__all__'
+
+
+class TaskLogTimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskLogTime
         fields = '__all__'
 
 
