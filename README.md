@@ -5,23 +5,15 @@
 ```
 git clone https://github.com/dnkngh/TaskTracker.git
 ```
-Установка виртуального окружения:
+Сборка образа (из папки backend):
 ```
-python -m venv venv
+docker build -t tasktracker . 
 ```
 Запуск виртуального окружения:
 ```
-source venv/scripts/activate
+docker run --name tasktracker -it -p 8000:8000 tasktracker
 ```
-Установка зависимостей:
-```
-pip install -r requirements.txt
-```
-Запуск проекта в dev-режиме (из папки tasktracker/tasktracker/):
-```
-python manage.py runserver
-```
-111
+http://127.0.0.1:8000/
 ### 1. Цель проекта 
 <hr>
 Цель проекта - разработать систему отслеживания задач (далее Система).
