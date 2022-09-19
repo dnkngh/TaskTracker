@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api.apps.ApiConfig',
+    'core.apps.CoreConfig',
     'tasks.apps.TasksConfig',
     'users.apps.UsersConfig',
 ]
@@ -42,10 +43,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tasktracker.urls'
 
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
