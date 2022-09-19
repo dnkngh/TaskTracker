@@ -15,7 +15,7 @@ class Project(models.Model):
         verbose_name='project code',
         help_text='project code',
     )
-    description = models.CharField(
+    description = models.TextField(
         max_length=1000,
         verbose_name='project description',
         help_text='project description',
@@ -48,13 +48,41 @@ class Project(models.Model):
         return self.name
 
 
+class ProjectTaskStatus(models.Model):
+    name = models.CharField(
+        max_length=15,
+        verbose_name='status name',
+        help_text='status name',
+    )
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name='task_statuses',
+        verbose_name='related project',
+        help_text='related project',
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('id',)
+        verbose_name = 'ProjectTaskStatus'
+        verbose_name_plural = 'ProjectTaskStatus'
+
+
 class Task(models.Model):
     PRIORITY_OPTIONS = (
         ('LOW', 'LOW'),
         ('MEDIUM', 'MEDIUM'),
         ('HIGH', 'HIGH'),
     )
-
+    STATUS_OPTIONS = (
+        ('OPEN', 'OPEN'),
+        ('TO DO', 'TO DO'),
+        ('IN PROGRESS', 'IN PROGRESS'),
+        ('DONE', 'DONE'),
+    )
     name = models.CharField(
         max_length=100,
         verbose_name='task name',
@@ -90,6 +118,15 @@ class Task(models.Model):
         db_index=True,
         verbose_name='date created',
         help_text='date created',
+    )
+    status = models.ForeignKey(
+        ProjectTaskStatus,
+        on_delete=models.CASCADE,
+        related_name='tasks',
+        verbose_name='task status',
+        help_text='task status',
+        blank=True,
+        null=True
     )
     deadline = models.DateTimeField(
         blank=True,
@@ -151,4 +188,4 @@ class TaskLogTime(models.Model):
     class Meta:
         ordering = ('id',)
         verbose_name = 'TaskLogTime'
-        verbose_name_plural = 'TaskLogTimes'
+        verbose_name_plural = 'TaskLogTime'

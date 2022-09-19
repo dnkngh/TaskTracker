@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tasks.models import Project, Task, TaskLogTime
+from tasks.models import Project, ProjectTaskStatus, Task, TaskLogTime
 
 
 @admin.register(Project)
@@ -14,12 +14,22 @@ class ProjectAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(ProjectTaskStatus)
+class ProjectTaskStatusAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+    )
+
+
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
         'project',
+        'priority',
+        'status',
         'creator',
         'executor',
         'text',
