@@ -6,28 +6,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Procrastinate.</title>
-    <link rel="stylesheet" href="file:///C:/Dev/TaskTracker/backend/templates/core/style.css">
-    <link rel="stylesheet" href="https://code.s3.yandex.net/web-code/adaptive.css">
-    <link rel="icon" type="image" href="https://code.s3.yandex.net/web-code/js-favicon.ico">
+    <title>soon™</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://code.s3.yandex.net/web-code/adaptive.css">
+
   </head>
+
   <body>
     <div class="header">
-      <p class="logo">Procrastinate.</p>
-      <div class="button">Ещё идея</div>
+      <div>
+        <a href="{% url 'core:index_yandex' %}" class="button">Кто-нибудь когда-нибудь напишет фронтенд</a>
+      </div>
     </div>
 
-    <img class="image" src="https://code.s3.yandex.net/web-code/procrastinate/9.png">
+    <img height="300" width="300" src="https://static10.tgstat.ru/channels/_0/17/1748e05de22390bb4f1b92b8ea950523.jpg">
+    <p></p>
 
-    <div class="advice">
-      <span>Не писать код, а</span>
-      <span class="phrase">что бы поделать?</span>
-      <img class="cursor" src="https://code.s3.yandex.net/web-code/cursor.gif">
+    <div>
+      <p class="form-control col col-lg-12 text-center out"></p>
     </div>
 
-    <p class="footer">© 2020 N</p>
+    <p class="footer">© 2022 N</p>
 
-    <script src="https://code.s3.yandex.net/web-code/smoothly.js"></script>
-    <script src="file:///C:/Dev/TaskTracker/backend/templates/core/script.js"></script>
+    <script src="{% static 'script/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
   </body>
 </html>
