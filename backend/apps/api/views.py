@@ -1,13 +1,14 @@
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 
-from api.serializers import (
+from apps.api.serializers import (
     ProjectSerializer,
     TaskSerializer,
     TaskLogTimeSerializer,
     UserSerializer
 )
-from tasks.models import Project, Task, TaskLogTime
+from apps.projects.models import Project
+from apps.tasks.models import Task, TaskLogTime
 
 User = get_user_model()
 

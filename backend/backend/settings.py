@@ -25,10 +25,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api.apps.ApiConfig',
-    'core.apps.CoreConfig',
-    'tasks.apps.TasksConfig',
-    'users.apps.UsersConfig',
+    'apps.api.apps.ApiConfig',
+    'apps.core.apps.CoreConfig',
+    'apps.projects.apps.ProjectsConfig',
+    'apps.tasks.apps.TasksConfig',
+    'apps.users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -41,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'tasktracker.urls'
+ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
@@ -60,7 +61,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'tasktracker.wsgi.application'
+WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 # Database
