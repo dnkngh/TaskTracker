@@ -106,7 +106,7 @@ class ProjectPermission(models.Model):
         return f'{self.name} - {self.project.name}'
 
     class Meta:
-        ordering = ('project',)
+        ordering = ('project', 'id')
         verbose_name = 'ProjectPermission'
         verbose_name_plural = 'ProjectPermission'
 
@@ -116,26 +116,26 @@ class ProjectUserPermission(models.Model):
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
-        related_name='project_user_permissions',
-        verbose_name='related project',
-        help_text='related project',
+        related_name='user_permissions',
+        verbose_name='project',
+        help_text='project',
     )
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='user_project_permissions',
-        verbose_name='related user',
-        help_text='relater user',
+        related_name='project_permissions',
+        verbose_name='user',
+        help_text='user',
     )
     permission = models.ForeignKey(
         ProjectPermission,
         on_delete=models.CASCADE,
-        related_name='all_user_permissions',
-        verbose_name='relater project permission',
-        help_text='relater project permission',
+        related_name='project_user_permissions',
+        verbose_name='project permission',
+        help_text='project permission',
     )
 
     class Meta:
-        ordering = ('id',)
+        ordering = ('user', 'project')
         verbose_name = 'ProjectUserPermission'
         verbose_name_plural = 'ProjectUserPermission'

@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from apps.projects.models import Project, ProjectTaskStatus, ProjectPermission, ProjectUserPermission
+from apps.projects.models import (
+    Project,
+    ProjectPermission,
+    ProjectTaskStatus,
+    ProjectUserPermission
+)
 
 
 @admin.register(Project)
@@ -44,3 +49,5 @@ class ProjectUserPermissionAdmin(admin.ModelAdmin):
         'user',
         'permission',
     )
+
+
