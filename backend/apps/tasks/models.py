@@ -80,7 +80,7 @@ class Task(models.Model):
     class Meta:
         ordering = ('id',)
         verbose_name = 'Task'
-        verbose_name_plural = 'Tasks'
+        verbose_name_plural = 'Task'
 
     def __str__(self):
         return self.name
