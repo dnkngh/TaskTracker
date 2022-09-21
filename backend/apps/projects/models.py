@@ -7,11 +7,13 @@ User = get_user_model()
 class Project(models.Model):
     name = models.CharField(
         max_length=100,
+        unique=True,
         verbose_name='project name',
         help_text='project name',
     )
     code = models.CharField(
         max_length=10,
+        unique=True,
         verbose_name='project code',
         help_text='project code',
     )
@@ -67,7 +69,7 @@ class ProjectTaskStatus(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('project',)
+        ordering = ('project', 'id',)
         verbose_name = 'ProjectTaskStatus'
         verbose_name_plural = 'ProjectTaskStatus'
 
@@ -109,6 +111,12 @@ class ProjectPermission(models.Model):
         ordering = ('project', 'id')
         verbose_name = 'ProjectPermission'
         verbose_name_plural = 'ProjectPermission'
+        constraints = [
+            models.UniqueConstraint(
+                name='unique_name_project',
+                fields=['name', 'project'],
+            )
+        ]
 
 
 class ProjectUserPermission(models.Model):
@@ -139,3 +147,9 @@ class ProjectUserPermission(models.Model):
         ordering = ('user', 'project')
         verbose_name = 'ProjectUserPermission'
         verbose_name_plural = 'ProjectUserPermission'
+        constraints = [
+            models.UniqueConstraint(
+                name='unique_user_project',
+                fields=['user', 'project'],
+            )
+        ]

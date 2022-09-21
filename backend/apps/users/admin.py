@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from django.db.models.aggregates import Sum
 
+from apps.projects.models import Project
+
 User = get_user_model()
 
 EMPTY_VALUE_MESSAGE = 0
@@ -24,12 +26,11 @@ class UserAdmin(UserAdmin):
     @admin.display(description='projects')
     def get_projects(self, obj):
 
-        # perm = obj.project_permissions.values('project_id')[0]
-        # print(perm)
-        # project = Project.objects.filter(pk=perm['project_id'])
-        # print(project)
-        # # return '\n'.join([project['permission'] for project in list_])
-        # return project
+        perm = obj.project_permissions.values()
+
+        print(perm)
+        # return '\n'.join([project['permission'] for project in list_])
+
 
         list_ = obj.created_projects.values('name')
         return '\n'.join([project['name'] for project in list_])
@@ -43,4 +44,3 @@ class UserAdmin(UserAdmin):
                 total_time=Sum('time_spent')
             ).get('total_time')
         )
-
