@@ -12,12 +12,6 @@ class Task(models.Model):
         ('MEDIUM', 'MEDIUM'),
         ('HIGH', 'HIGH'),
     )
-    STATUS_OPTIONS = (
-        ('OPEN', 'OPEN'),
-        ('TO DO', 'TO DO'),
-        ('IN PROGRESS', 'IN PROGRESS'),
-        ('DONE', 'DONE'),
-    )
     name = models.CharField(
         max_length=100,
         verbose_name='task name',
@@ -40,13 +34,6 @@ class Task(models.Model):
         related_name='created_tasks',
         verbose_name='task creator',
         help_text='task creator',
-    )
-    executor = models.ForeignKey(
-        User,
-        on_delete=models.DO_NOTHING,
-        related_name='tasks',
-        verbose_name='task executor',
-        help_text='task executor',
     )
     pub_date = models.DateTimeField(
         auto_now_add=True,
@@ -84,6 +71,37 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TaskAssignee(models.Model):
+    task = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+        related_name='task_assignees',
+        verbose_name='task',
+        help_text='task',
+    )
+    assignee = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='task_assignees',
+        verbose_name='assignee',
+        help_text='assignee',
+    )
+
+    class Meta:
+        ordering = ('id',)
+        verbose_name = 'TaskAssignee'
+        verbose_name_plural = 'TaskAssignee'
+        constraints = [
+            models.UniqueConstraint(
+                name='unique_task_assignee',
+                fields=['task', 'assignee'],
+            )
+        ]
+
+    def __str__(self):
+        return f'{self.task} - {self.assignee}'
 
 
 class TaskLogTime(models.Model):
