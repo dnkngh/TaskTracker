@@ -62,7 +62,7 @@ class Command(BaseCommand):
                 f'Projects {", ".join([project["name"] for project in PROJECTS])}'
             )
 
-            # ProjectTaskStatus"
+            # ProjectTaskStatus
             for pr in PROJECTS:
                 project_obj = Project.objects.get(name=pr.get('name'))
                 for task_status in PROJECTS_TASK_STATUS:
