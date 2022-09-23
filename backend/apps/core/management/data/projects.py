@@ -20,7 +20,22 @@ PROJECTS_TASK_STATUS = [
 ]
 
 PROJECT_PERMISSIONS = [
-    'viewer',
-    'user',
-    'lead',
+    {
+        'name': 'viewer',
+        'can_view': True,
+        'can_participate': False,
+        'can_moderate': False,
+    },
+    {
+        'name': 'user',
+        'can_view': True,
+        'can_participate': True,
+        'can_moderate': False,
+    },
+    {
+        'name': 'lead',
+        'can_view': True,
+        'can_participate': True,
+        'can_moderate': True,
+    },
 ]

@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
-from apps.projects.models import Project, ProjectTaskStatus
+from apps.projects.models import Project, ProjectTaskStatus, ProjectPermission
 
 from apps.core.management.data.projects import (
     PROJECTS,
@@ -32,7 +32,7 @@ class Command(BaseCommand):
             )
             users_created = True
             print(
-                f'USERS {", ".join([user["email"] for user in USERS])} CREATED'
+                f'Users created: {", ".join([user["email"] for user in USERS])}'
             )
         else:
             print('USERS ALREADY EXIST')
@@ -45,7 +45,7 @@ class Command(BaseCommand):
                 username='Third-Eyed Raven',
                 password='admin',
             )
-            print('ADMIN USER a@a.com CREATED')
+            print('Admin user a@a.com CREATED')
         else:
             print('ADMIN USER ALREADY EXISTS')
 
@@ -59,20 +59,30 @@ class Command(BaseCommand):
                 ) for project in PROJECTS
             )
             print(
-                f'Projects {", ".join([project["name"] for project in PROJECTS])}'
+                f'Projects created: {", ".join([project["name"] for project in PROJECTS])}'
             )
 
-            # ProjectTaskStatus
             for pr in PROJECTS:
+                # ProjectTaskStatus
                 project_obj = Project.objects.get(name=pr.get('name'))
                 for task_status in PROJECTS_TASK_STATUS:
                     ProjectTaskStatus.objects.create(
                         name=task_status,
                         project=project_obj,
                     )
+                # ProjectPermission
+                ProjectPermission.objects.bulk_create(
+                    ProjectPermission(
+                        name=permission.get('name'),
+                        project=project_obj,
+                        can_view=permission.get('can_view'),
+                        can_participate=permission.get('can_participate'),
+                        can_moderate=permission.get('can_moderate'),
+                    ) for permission in PROJECT_PERMISSIONS
+                )
             print(
-                f'ProjectTaskStatuses {", ".join(PROJECTS_TASK_STATUS)} CREATED'
+                f'ProjectTaskStatuses created: {", ".join(PROJECTS_TASK_STATUS)}'
             )
-
-            # ProjectPermission
-
+            print(
+                f'ProjectPermissions created: {", ".join(permission.get("name") for permission in PROJECT_PERMISSIONS)}'
+            )
