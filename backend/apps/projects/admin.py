@@ -24,9 +24,9 @@ class ProjectAdmin(admin.ModelAdmin):
 class ProjectTaskStatusAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'order_number',
-        'name',
         'project',
+        'name',
+        'order_number',
     )
 
 

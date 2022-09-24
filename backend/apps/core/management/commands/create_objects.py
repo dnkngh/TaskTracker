@@ -1,7 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
+from django.db.models import Q
 
-from apps.projects.models import Project, ProjectTaskStatus, ProjectPermission
+from apps.projects.models import (
+    Project,
+    ProjectTaskStatus,
+    ProjectPermission,
+    ProjectUserPermission
+)
 
 from apps.core.management.data.projects import (
     PROJECTS,
@@ -83,6 +89,18 @@ class Command(BaseCommand):
 
                     ) for permission in PROJECT_PERMISSIONS
                 )
+
+                # # ProjectUserPermission
+                # ProjectUserPermission.objects.bulk_create(
+                #     ProjectUserPermission(
+                #         project=project,
+                #         user=User.objects.get(last_name='Varys'),
+                #         permission=ProjectPermission.objects.filter(
+                #             project=project,
+                #             name='VIEWER'
+                #         ).first(),
+                #     ) for project in Project.objects.all()
+                # )
             print(
                 f'ProjectTaskStatuses created: {", ".join(status.get("name") for status in PROJECTS_TASK_STATUS)}'
             )

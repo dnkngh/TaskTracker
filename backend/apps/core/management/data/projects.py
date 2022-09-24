@@ -4,13 +4,22 @@ PROJECTS = [
         'code': 'WF',
         'description': 'Winter preparation roadmap',
         'creator': 'Eddard',
+        'viewer': 'Varys',
     },
     {
         'name': 'Casterly Rock',
         'code': 'CR',
-        'description': 'Wars swallow golds like a pit in the Earth',
+        'description': 'Wars swallow gold like a pit in the Earth',
         'creator': 'Tywin',
-    }
+        'viewer': 'Varys',
+    },
+    {
+        'name': 'Dragonstone',
+        'code': 'DS',
+        'description': 'Fire and Blood',
+        'creator': 'Daenerys',
+        'viewer': 'Varys',
+    },
 ]
 
 PROJECTS_TASK_STATUS = [

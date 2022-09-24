@@ -40,5 +40,19 @@ USERS = [
         'last_name': 'Lannister',
         'username': 'The Lion of Lannister',
         'password': '123456',
-    }
+    },
+    {
+        'email': 'daenerys@targrayen.vl',
+        'first_name': 'Daenerys',
+        'last_name': 'Targaryen',
+        'username': 'The Mother of Dragons',
+        'password': '123456',
+    },
+    {
+        'email': 'varys@cia.gov',
+        'first_name': 'Lord',
+        'last_name': 'Varys',
+        'username': 'The Spider',
+        'password': '123456',
+    },
 ]

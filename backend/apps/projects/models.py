@@ -8,25 +8,25 @@ class Project(models.Model):
     name = models.CharField(
         max_length=100,
         unique=True,
-        verbose_name='project name',
-        help_text='project name',
+        verbose_name='name',
+        help_text='name',
     )
     code = models.CharField(
         max_length=10,
-        verbose_name='project code',
-        help_text='project code',
+        verbose_name='code',
+        help_text='code',
     )
     description = models.TextField(
         max_length=1000,
-        verbose_name='project description',
-        help_text='project description',
+        verbose_name='description',
+        help_text='description',
     )
     creator = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='created_projects',
-        verbose_name='project creator',
-        help_text='project creator',
+        verbose_name='creator',
+        help_text='creator',
     )
     owner = models.ForeignKey(
         User,
@@ -34,8 +34,8 @@ class Project(models.Model):
         null=True,
         blank=True,
         related_name='owned_projects',
-        verbose_name='project owner',
-        help_text='project owner',
+        verbose_name='owner',
+        help_text='owner',
     )
 
     class Meta:
@@ -58,8 +58,8 @@ class ProjectTaskStatus(models.Model):
         Project,
         on_delete=models.CASCADE,
         related_name='task_statuses',
-        verbose_name='related project',
-        help_text='related project',
+        verbose_name='project',
+        help_text='project',
     )
     order_number = models.PositiveSmallIntegerField(
         verbose_name='status order number',
@@ -84,19 +84,21 @@ class ProjectPermission(models.Model):
     )
     name = models.CharField(
         max_length=30,
-        verbose_name='permission name',
-        help_text='permission name',
+        verbose_name='name',
+        help_text='name',
     )
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
         related_name='permissions',
-        verbose_name='related project',
-        help_text='related project',
+        verbose_name='project',
+        help_text='project',
     )
     permission = models.CharField(
         max_length=50,
         choices=PERMISSION_LEVELS,
+        verbose_name='permission',
+        help_text='permission',
     )
 
     def __str__(self):
@@ -134,8 +136,8 @@ class ProjectUserPermission(models.Model):
         ProjectPermission,
         on_delete=models.CASCADE,
         related_name='project_user_permissions',
-        verbose_name='project permission',
-        help_text='project permission',
+        verbose_name='permission',
+        help_text='permission',
     )
 
     class Meta:
