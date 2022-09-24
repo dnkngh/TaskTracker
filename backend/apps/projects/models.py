@@ -13,7 +13,6 @@ class Project(models.Model):
     )
     code = models.CharField(
         max_length=10,
-        unique=True,
         verbose_name='project code',
         help_text='project code',
     )
@@ -24,9 +23,7 @@ class Project(models.Model):
     )
     creator = models.ForeignKey(
         User,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.CASCADE,
         related_name='created_projects',
         verbose_name='project creator',
         help_text='project creator',
@@ -64,18 +61,27 @@ class ProjectTaskStatus(models.Model):
         verbose_name='related project',
         help_text='related project',
     )
+    order_number = models.PositiveSmallIntegerField(
+        verbose_name='status order number',
+        help_text='status order number',
+    )
 
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ('project', 'id',)
+        ordering = ('project', 'order_number',)
         verbose_name = 'ProjectTaskStatus'
         verbose_name_plural = 'ProjectTaskStatus'
 
 
 class ProjectPermission(models.Model):
     """Права доступа в проекте"""
+    PERMISSION_LEVELS = (
+        ('VIEWER', 'VIEWER'),
+        ('PARTICIPANT', 'PARTICIPANT'),
+        ('ADMINISTRATOR', 'ADMINISTRATOR'),
+    )
     name = models.CharField(
         max_length=30,
         verbose_name='permission name',
@@ -88,20 +94,9 @@ class ProjectPermission(models.Model):
         verbose_name='related project',
         help_text='related project',
     )
-    can_view = models.BooleanField(
-        null=False,
-        verbose_name='view permission',
-        help_text='view permission',
-    )
-    can_participate = models.BooleanField(
-        null=False,
-        verbose_name='participant permission',
-        help_text='participant permission',
-    )
-    can_moderate = models.BooleanField(
-        null=False,
-        verbose_name='moderator permission',
-        help_text='moderator permission',
+    permission = models.CharField(
+        max_length=50,
+        choices=PERMISSION_LEVELS,
     )
 
     def __str__(self):

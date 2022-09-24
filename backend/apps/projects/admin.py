@@ -24,6 +24,7 @@ class ProjectAdmin(admin.ModelAdmin):
 class ProjectTaskStatusAdmin(admin.ModelAdmin):
     list_display = (
         'id',
+        'order_number',
         'name',
         'project',
     )
@@ -35,9 +36,7 @@ class ProjectPermissionAdmin(admin.ModelAdmin):
         'id',
         'name',
         'project',
-        'can_view',
-        'can_participate',
-        'can_moderate',
+        'permission',
     )
 
 
@@ -49,5 +48,3 @@ class ProjectUserPermissionAdmin(admin.ModelAdmin):
         'user',
         'permission',
     )
-
-

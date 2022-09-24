@@ -55,7 +55,8 @@ class Command(BaseCommand):
                 Project(
                     name=project.get('name'),
                     code=project.get('code'),
-                    description=project.get('description')
+                    description=project.get('description'),
+                    creator=User.objects.get(first_name=project.get('creator')),
                 ) for project in PROJECTS
             )
             print(
@@ -65,23 +66,25 @@ class Command(BaseCommand):
             for pr in PROJECTS:
                 # ProjectTaskStatus
                 project_obj = Project.objects.get(name=pr.get('name'))
-                for task_status in PROJECTS_TASK_STATUS:
-                    ProjectTaskStatus.objects.create(
-                        name=task_status,
+                ProjectTaskStatus.objects.bulk_create(
+                    ProjectTaskStatus(
+                        order_number=task_status.get('order_number'),
+                        name=task_status.get('name'),
                         project=project_obj,
-                    )
+                    ) for task_status in PROJECTS_TASK_STATUS
+                )
+
                 # ProjectPermission
                 ProjectPermission.objects.bulk_create(
                     ProjectPermission(
                         name=permission.get('name'),
                         project=project_obj,
-                        can_view=permission.get('can_view'),
-                        can_participate=permission.get('can_participate'),
-                        can_moderate=permission.get('can_moderate'),
+                        permission=permission.get('permission'),
+
                     ) for permission in PROJECT_PERMISSIONS
                 )
             print(
-                f'ProjectTaskStatuses created: {", ".join(PROJECTS_TASK_STATUS)}'
+                f'ProjectTaskStatuses created: {", ".join(status.get("name") for status in PROJECTS_TASK_STATUS)}'
             )
             print(
                 f'ProjectPermissions created: {", ".join(permission.get("name") for permission in PROJECT_PERMISSIONS)}'
